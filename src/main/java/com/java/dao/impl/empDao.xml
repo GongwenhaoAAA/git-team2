@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.impl.empImpl">
+
+    <!--
+        sql标签：存放公共的字段
+            id属性：指定唯一的标识符
+     -->
+    <sql id="commonField">
+        ename,job,hiredate,sal
+    </sql>
+
+    <!--模糊查询-->
+    <select id="mohuSelect" parameterType="Map" resultType="Map">
+        SELECT <include refid="commonField" />  FROM `books` WHERE bookName LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+    <!--查询所有数据--><!--resultType返回的结果类型--><!--parameterType映射到java中的类型-->
+    <select id="selectAll" resultType="Emp" >
+        SELECT <include refid="commonField" />  FROM emp
+    </select>
+    <select id="selectOne" resultType="Map" parameterType="Map">
+          SELECT <include refid="commonField" />  FROM emp WHERE ename like CONCAT('%',#{ename},'%')
+    </select>
+    <insert id="insert" parameterType="Dept" >
+        INSERT INTO dept VALUES (#{deptno},#{dname},#{loc})
+    </insert>
+
+    <update id="update" parameterType="Dept">
+      update dept set dname=#{dname},loc=#{loc} where deptno=#{deptno};
+    </update>
+    <delete id="delete" >
+        delete from dept where deptno=#{0}
+    </delete>
+    <select id="selectEmp" resultType="Emp" >
+        SELECT <include refid="commonField" />  FROM emp
+    </select>
+</mapper>

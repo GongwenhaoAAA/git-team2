@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.java.pojo.Emp" alias="Emp"></typeAlias>
+        <typeAlias type="com.java.pojo.Dept" alias="Dept"></typeAlias>
+    </typeAliases>
+    <!--配置环境-->
+    <environments default="mysql">
+
+        <environment id="mysql">
+            <!--制定事务-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--数据源-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.p6spy.engine.spy.P6SpyDriver"></property>
+                <property name="url" value="jdbc:p6spy:mysql:///exam"></property>
+                <property name="username" value="root"></property>
+                <property name="password" value="root"></property>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/java/dao/impl/empDao.xml"></mapper>
+    </mappers>
+</configuration>
+
